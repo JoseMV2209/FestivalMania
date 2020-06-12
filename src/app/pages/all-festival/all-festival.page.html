@@ -1,0 +1,16 @@
+
+<app-header title="Festivales"></app-header>
+
+<ion-content>
+
+    <ion-list inset="true">
+        <ion-item *ngFor="let fest of fetivals" 
+                    [routerLink]="fest.redirectTo" detail>
+            <ion-avatar slot="start">
+                <img [src]="fest.image">
+            </ion-avatar>
+            <ion-label>{{fest.name}}</ion-label>
+        </ion-item>
+    </ion-list>
+
+</ion-content>

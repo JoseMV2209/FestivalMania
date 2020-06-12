@@ -1,0 +1,7 @@
+{
+  "name": "FestivalMania",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
