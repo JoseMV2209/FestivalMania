@@ -1,10 +1,96 @@
-<app-header title="Festival"></app-header>
+<app-header title="festival"></app-header>
 
-<ion-content>
-
-    <ion-button (click)="presentActionSheet()" 
-                color="primary">
-        Opciones festival
-    </ion-button>
-
+<ion-content fullscreen>
+    <ion-grid fixed>
+        <ion-row *ngIf="festival">
+            <ion-col size="12">
+                <ion-title class="ion-text-center ion-text-capitalize">
+                    {{ festival.name }}
+                </ion-title>
+            </ion-col>
+        </ion-row>
+        <ion-row *ngIf="festival">
+            <ion-col size="12">
+                <br/>
+                <ion-img [src]="festival.image"></ion-img>
+                <br/>
+                <br/>
+            </ion-col>
+        </ion-row>
+        <ion-row *ngIf="festival">
+            <ion-col size="12">
+                <br/>
+                <ion-title>Descripcion:</ion-title>
+                <br/>
+            </ion-col>
+        </ion-row>
+        <ion-row *ngIf="festival">
+            <ion-col size="12">
+                <ion-text>{{ festival.description }}</ion-text>
+                <br/>
+                <br/>
+                <br/>
+            </ion-col>
+        </ion-row>
+        <ion-row *ngIf="festival">
+            <ion-col size="6">
+                <br/>
+                <a [href]="festival.webSite">Web oficial</a>
+                <br/>
+                <br/>
+                <br/>
+            </ion-col>
+            <ion-col size="6">
+                <br/>
+                <ion-button (click)="presentActionSheet()" 
+                            size="small" color="primary">
+                    Opciones
+                </ion-button>
+                <br/>
+                <br/>
+                <br/>
+            </ion-col>
+        </ion-row>
+        <ion-row *ngIf="notiEncontra">
+            <ion-col size="12">
+                <br/>
+                <ion-title>Noticias:</ion-title>
+                <br/>
+            </ion-col>
+        </ion-row>
+        <ion-row *ngIf="notiEncontra">
+            <ion-col  *ngFor="let noticia of noticias"  size="6">
+                <ion-img [routerLink]="['/noticia', noticia.id]"
+                         [src]="noticia.image" detail>
+                </ion-img>
+                <ion-text class="ion-text-justify">{{ noticia.titular }}</ion-text>
+            </ion-col>
+        </ion-row>
+        <ion-row *ngIf="festival">
+            <ion-col size="3">
+                <br/>
+                <a href="https://twitter.com/home">
+                    <ion-icon name="logo-twitter"></ion-icon>
+                </a>
+            </ion-col>
+            <ion-col size="3">
+                <br/>
+                <a href="https://www.facebook.com/">
+                    <ion-icon name="logo-facebook"></ion-icon>
+                </a>
+            </ion-col>
+            <ion-col size="3">
+                <br/>
+                <a href="https://www.instagram.com/">
+                    <ion-icon name="logo-instagram"></ion-icon>
+                </a>
+            </ion-col>
+            <ion-col size="3">
+                <br/>
+                <a href="https://www.youtube.com/">
+                    <ion-icon name="logo-youtube"></ion-icon>
+                </a>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
 </ion-content>

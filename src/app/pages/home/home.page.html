@@ -1,6 +1,69 @@
 
 <app-header title="Inicio"></app-header>
 
-<ion-content>
+<ion-content fullscreen>
+
+    <ion-grid fixed>
+        <ion-row>
+            <ion-col>
+                <ion-slides pager="true">
+                    <ion-slide>
+                        <h1>Slide 1</h1>
+                    </ion-slide>
+                    <ion-slide>
+                        <h1>Slide 2</h1>
+                    </ion-slide>
+                    <ion-slide>
+                        <h1>Slide 3</h1>
+                    </ion-slide>
+                    <ion-slide>
+                        <h1>Slide 4</h1>
+                    </ion-slide>
+                </ion-slides>
+                <br/>
+                <br/>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col>
+                <ion-text>Destacados:</ion-text>
+                <br/>
+                <br/>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col *ngFor="let festival of festivales; " 
+                     [routerLink]="['/festival', festival.id]"
+                     size="3">
+                     <ion-avatar>
+                        <img [src]="festival.icon">
+                    </ion-avatar>
+                <br/>
+                <ion-text class="ion-text-justify">{{ festival.name }}</ion-text>
+            </ion-col>
+        </ion-row>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <ion-row>
+            <ion-col>
+                <ion-text>Noticias:</ion-text>
+                <br/>
+                <br/>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col *ngFor="let noticia of noticias; " 
+                     [routerLink]="['/noticia', noticia.id]"
+                     size="6">
+                <ion-img [src]="noticia.image" detail>
+                </ion-img>
+                <br/>
+                <ion-text class="ion-text-justify">{{ noticia.titular }}</ion-text>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
 
 </ion-content>
+

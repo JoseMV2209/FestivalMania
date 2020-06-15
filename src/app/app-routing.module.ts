@@ -12,12 +12,24 @@ const routes: Routes = [
     loadChildren: () => import('./pages/home/home.module').then( m => m.HomePageModule)
   },
   {
-    path: 'festival',
+    path: 'festival/:id',
     loadChildren: () => import('./pages/festival/festival.module').then( m => m.FestivalPageModule)
   },
   {
     path: 'all-festival',
     loadChildren: () => import('./pages/all-festival/all-festival.module').then( m => m.AllFestivalPageModule)
+  },
+  {
+    path: 'favoritos',
+    loadChildren: () => import('./pages/favoritos/favoritos.module').then( m => m.FavoritosPageModule)
+  },
+  {
+    path: 'contacto',
+    loadChildren: () => import('./pages/contacto/contacto.module').then( m => m.ContactoPageModule)
+  },
+  {
+    path: 'noticia/:id',
+    loadChildren: () => import('./pages/noticia/noticia.module').then( m => m.NoticiaPageModule)
   },
 ];
 

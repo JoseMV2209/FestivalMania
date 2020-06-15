@@ -1,4 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { PopoverController } from '@ionic/angular';
+import { PopinfoComponent } from '../popinfo/popinfo.component';
 
 @Component({
   selector: 'app-header',
@@ -9,17 +11,22 @@ export class HeaderComponent implements OnInit {
 
   @Input() title: string;
 
-  constructor() { }
+  constructor(private popCtrl: PopoverController) { }
 
   ngOnInit() {}
 
-  onClickMenu(){
-    
-  }
+  async mostrarPop(evento){
 
-  onClickIcon(){
-    
-  }
+    const popover = await this.popCtrl.create({
 
+      component: PopinfoComponent,
+      event: evento,
+      mode: 'ios'
+
+    });
+
+    await popover.present();
+
+  }
 
 }

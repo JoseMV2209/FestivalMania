@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActionSheetController, AlertController } from '@ionic/angular';
+import { FirebaseService } from '../../services/firebase.service';
+import { Festival } from '../../interfaces/iFestival';
+import { INoticia } from '../../interfaces/iNoticia';
+import { ActivatedRoute } from '@angular/router';
+import { NavController, LoadingController } from '@ionic/angular';
 
 @Component({
   selector: 'app-festival',
@@ -8,12 +13,64 @@ import { ActionSheetController, AlertController } from '@ionic/angular';
 })
 export class FestivalPage implements OnInit {
 
+  festival: Festival;
+  noticias: INoticia[] = new Array;
+  festivalId: string = null;
+  notiEncontra: boolean = false;
+
+
   constructor(
     private actionSheetCtrl: ActionSheetController,
-    private alertCtrl: AlertController    
-    ) { }
+    private alertCtrl: AlertController,
+    private route: ActivatedRoute,
+    private nav: NavController,
+    private firebase: FirebaseService,
+     private loadingCtrl: LoadingController
+  ) { }
 
   ngOnInit() {
+
+    this.festivalId = this.route.snapshot.params['id'];
+
+    if(this.festivalId){
+      this.loadFestival();
+      this.searchNews();
+    }
+
+  }
+
+  searchNews(){
+
+    this.firebase.getNoticas().subscribe(res => {
+      
+      for(let i = 0; i < res.length; i++){
+
+        if(res[i].refFestivales.indexOf(this.festivalId) != -1){
+          this.noticias.push(res[i]);
+          this.notiEncontra = true;
+        }
+
+      }
+
+    });
+  }
+
+
+  /* Cargando el festival elegido mediante id */
+
+  async loadFestival(){
+    const loading = await this.loadingCtrl.create({
+      message: 'Cargando...'
+    });
+
+    await loading.present();
+
+    this.firebase.getFestival(this.festivalId).subscribe(res => {
+      
+      this.festival = res;
+      loading.dismiss();
+
+    });
   }
 
   // Opicion de un festival en formato Action Sheet

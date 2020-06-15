@@ -1,16 +1,43 @@
 
-<app-header title="Festivales"></app-header>
+<app-header title="festivales"></app-header>
 
-<ion-content>
+<ion-content fullscreen>
+    <ion-grid fixed>
+        <ion-row>
+            <!--
+            <ion-col size-lg="1" size-sm="2" size-xs="3">
+                <ion-list >
+                    <ion-item *ngFor="let letra of abecedario">
+                        <ion-label class="ion-text-center">{{letra}}</ion-label>
+                    </ion-item>
+                </ion-list> 
+            </ion-col> 
+            -->
+            <ion-col size="12"> <!-- size-lg="11" size-sm="10" size-xs="9" -->
+                <ion-img src="../../../assets/image/backgroundBanner.jpg"></ion-img>
+            </ion-col> 
+            <ion-col size="12"> <!-- size-lg="11" size-sm="10" size-xs="9" -->
+                <ion-list>
+                    <ion-item *ngFor="let festival of fetivals" 
+                                [routerLink]="['/festival', festival.id]" detail>
+                        <ion-avatar slot="start">
+                            <img [src]="festival.icon">
+                        </ion-avatar>
+                        <ion-label class="ion-text-capitalize">{{festival.name}}</ion-label>
+                    </ion-item>
+                </ion-list>
 
-    <ion-list inset="true">
-        <ion-item *ngFor="let fest of fetivals" 
-                    [routerLink]="fest.redirectTo" detail>
-            <ion-avatar slot="start">
-                <img [src]="fest.image">
-            </ion-avatar>
-            <ion-label>{{fest.name}}</ion-label>
-        </ion-item>
-    </ion-list>
+                <!--
+                <ion-infinite-scroll threshold="100px" 
+                                    (ionInfinite)="loadData($event)">
+                    <ion-infinite-scroll-content
+                      loadingSpinner="crescent"
+                      loadingText="Cargando siguientes...">
+                    </ion-infinite-scroll-content>
+                </ion-infinite-scroll>
+                -->
+            </ion-col>
+        </ion-row>
+    </ion-grid>
 
 </ion-content>

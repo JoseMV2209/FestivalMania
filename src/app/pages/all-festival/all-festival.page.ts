@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { IonInfiniteScroll } from '@ionic/angular';
+import { Festival } from 'src/app/interfaces/iFestival';
+import { FirebaseService } from '../../services/firebase.service'
 
 @Component({
   selector: 'app-all-festival',
@@ -7,63 +10,44 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AllFestivalPage implements OnInit {
 
-  fetivals: Festival[] = [
-    {
-      image: "../../../assets/icon/festardor-170x170.png",
-      name: "Festardor",
-      redirectTo: "/festival",
-      nAbecedario: 5
-    },
-    {
-      image: "../../../assets/icon/FIB_170x170.png",
-      name: "Festival Intenaciol de Benicassim",
-      redirectTo: "/festival",
-      nAbecedario: 5
-    },
-    {
-      image: "../../../assets/icon/iconArenalSound.png",
-      name: "Arenal Sound",
-      redirectTo: "/festival",
-      nAbecedario: 0
-    },
-    {
-      image: "../../../assets/icon/Icono-Viña-Rock_170x170.png",
-      name: "Viña Rock",
-      redirectTo: "/festival",
-      nAbecedario: 22
-    },
-    {
-      image: "../../../assets/icon/iconResussrectionFest_170x170.png",
-      name: "Resurrection Fest",
-      redirectTo: "/festival",
-      nAbecedario: 18
-    },
-    {
-      image: "../../../assets/icon/Feslloch_200x200.png",
-      name: "Feslloc",
-      redirectTo: "/festival",
-      nAbecedario: 5
-    },
-    {
-      image: "../../../assets/icon/RototomSunsplash_170x170.png",
-      name: "Rototom Sunsplash",
-      redirectTo: "/festival",
-      nAbecedario: 18
-    }
+  @ViewChild(IonInfiniteScroll) infiniteScroll: IonInfiniteScroll;
+
+  fetivals: Festival[];
+
+  abecedario: string[] = [
+    "A","B","C","D",
+    "E","F","G","H",
+    "I","J","K","L",
+    "M","N","Ñ","O",
+    "P","Q","R","S",
+    "T","U","V","W",
+    "X","Y","Z"
   ];
 
-  constructor() { }
+  constructor(private firebase: FirebaseService) { }
 
   ngOnInit() {
+
+    this.firebase.getFestivales().subscribe(res => {
+      this.fetivals = res;
+    });
+
   }
 
-}
+/*   loadData(event){
+    console.log("Cargando siguientes...");
 
-interface Festival {
+    setTimeout(() =>{
 
-  image: string;
-  name: string;
-  redirectTo: string;
-  nAbecedario: number;
+      if(this.fetivals.length == this.fetivals.length ){
+        event.target.complete();
+        this.infiniteScroll.disabled = true;
+        return;
+      }
+
+      event.target.complete();
+
+    }, 1000);
+  } */
 
 }

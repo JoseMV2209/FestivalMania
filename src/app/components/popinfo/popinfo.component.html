@@ -1,0 +1,45 @@
+
+<ion-list *ngIf="!usuario" color="medium">
+
+  <ion-item (click)="onClick()" routerLink="/home">
+    <ion-icon name="person-outline"
+              slot="start">
+    </ion-icon>
+      Registrarse
+  </ion-item>
+
+  <ion-item (click)="onClick()" routerLink="/home">
+    <ion-icon name="log-in-outline"
+              slot="start">
+    </ion-icon>
+      Iniciar sesion
+  </ion-item>
+
+</ion-list>
+
+<ion-list *ngIf="usuario" color="medium">
+
+  <ion-item (click)="onClick()" routerLink="/home">
+    <ion-icon name="person-outline"
+              slot="start">
+    </ion-icon>
+      Datos personales
+  </ion-item>
+
+  <ion-item (click)="onClick()" routerLink="/home">
+    <ion-icon name="card-outline"
+              slot="start">
+    </ion-icon>
+      Datos de pago
+  </ion-item>
+
+  <ion-item (click)="onClick()" routerLink="/home">
+    <ion-icon name="log-out-outline"
+              slot="start">
+    </ion-icon>
+    <ion-label>
+      Cerrar sesion
+    </ion-label>
+  </ion-item>
+
+</ion-list>
