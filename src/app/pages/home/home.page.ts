@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 
 import { INoticia } from 'src/app/interfaces/iNoticia';
 import { Festival } from 'src/app/interfaces/iFestival';
-import { FirebaseService } from '../../services/firebase.service'
+import { FirebaseNoticiasService } from '../../services/firebase-noticias.service';
+import { FirebaseFestivalesService } from '../../services/firebase-festivales.service';
 
 @Component({
   selector: 'app-home',
@@ -15,11 +16,14 @@ export class HomePage implements OnInit {
   festivales: Festival[];
   iUsed: number[];
 
-  constructor(private firebase: FirebaseService) { }
+  constructor(
+    private firebaseNoti: FirebaseNoticiasService,
+    private firebaseFesti: FirebaseFestivalesService
+  ) { }
 
   ngOnInit() {
 
-    this.firebase.getNoticas().subscribe(res => {
+    this.firebaseNoti.getNoticas().subscribe(res => {
       this.iUsed = new Array;
 
       if(res.length > 4){
@@ -38,18 +42,19 @@ export class HomePage implements OnInit {
       }
     });
 
-    this.firebase.getFestivales().subscribe(res => {
+    this.firebaseFesti.getFestivales().subscribe(res => {
       this.iUsed = new Array;
       this.festivales = new Array;
       
       if(res.length > 4){
-        for(let i = 0; i < 4; i++){
+        for(let i = 0; i < 4;){
           let random = Math.floor(Math.random() * res.length);
 
           if(this.iUsed.indexOf(random) == -1){
             
             this.festivales.push(res[random]);
             this.iUsed.push(random);
+            i++;
 
           }
         }

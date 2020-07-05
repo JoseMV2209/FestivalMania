@@ -7,17 +7,9 @@
         <ion-row>
             <ion-col>
                 <ion-slides pager="true">
-                    <ion-slide>
-                        <h1>Slide 1</h1>
-                    </ion-slide>
-                    <ion-slide>
-                        <h1>Slide 2</h1>
-                    </ion-slide>
-                    <ion-slide>
-                        <h1>Slide 3</h1>
-                    </ion-slide>
-                    <ion-slide>
-                        <h1>Slide 4</h1>
+                    <ion-slide *ngFor="let festival of festivales; " 
+                    [routerLink]="['/festival', festival.id]">
+                        <img [src]="festival.image">
                     </ion-slide>
                 </ion-slides>
                 <br/>

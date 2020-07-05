@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Options } from 'src/app/interfaces/iOptions';
-import { DataService } from 'src/app/services/data.service';
-import { Observable } from 'rxjs';
-import { FirebaseService } from '../../services/firebase.service'
+import { FirebaseMenuService } from '../../services/firebase-menu.service';
 
 
 @Component({
@@ -14,11 +12,11 @@ export class MenuComponent implements OnInit {
 
   optionMenu: Options[];
 
-  constructor(private firebase: FirebaseService) { }
+  constructor(private firebaseMenu: FirebaseMenuService) { }
 
   ngOnInit() {
 
-    this.firebase.getMenuOptions().subscribe(res => {
+    this.firebaseMenu.getMenuOptions().subscribe(res => {
       this.optionMenu = res;
     });
 

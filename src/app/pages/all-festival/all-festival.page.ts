@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { IonInfiniteScroll } from '@ionic/angular';
 import { Festival } from 'src/app/interfaces/iFestival';
-import { FirebaseService } from '../../services/firebase.service'
+import { FirebaseFestivalesService } from '../../services/firebase-festivales.service';
 
 @Component({
   selector: 'app-all-festival',
@@ -24,11 +24,11 @@ export class AllFestivalPage implements OnInit {
     "X","Y","Z"
   ];
 
-  constructor(private firebase: FirebaseService) { }
+  constructor(private firebaseFesti: FirebaseFestivalesService) { }
 
   ngOnInit() {
 
-    this.firebase.getFestivales().subscribe(res => {
+    this.firebaseFesti.getFestivales().subscribe(res => {
       this.fetivals = res;
     });
 

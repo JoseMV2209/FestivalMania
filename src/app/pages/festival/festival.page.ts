@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActionSheetController, AlertController } from '@ionic/angular';
-import { FirebaseService } from '../../services/firebase.service';
+import { FirebaseFestivalesService } from '../../services/firebase-festivales.service';
+import { FirebaseNoticiasService } from '../../services/firebase-noticias.service';
 import { Festival } from '../../interfaces/iFestival';
 import { INoticia } from '../../interfaces/iNoticia';
 import { ActivatedRoute } from '@angular/router';
@@ -24,8 +25,9 @@ export class FestivalPage implements OnInit {
     private alertCtrl: AlertController,
     private route: ActivatedRoute,
     private nav: NavController,
-    private firebase: FirebaseService,
-     private loadingCtrl: LoadingController
+    private firebaseNoti: FirebaseNoticiasService,
+    private firebaseFesti: FirebaseFestivalesService,
+    private loadingCtrl: LoadingController
   ) { }
 
   ngOnInit() {
@@ -41,7 +43,7 @@ export class FestivalPage implements OnInit {
 
   searchNews(){
 
-    this.firebase.getNoticas().subscribe(res => {
+    this.firebaseNoti.getNoticas().subscribe(res => {
       
       for(let i = 0; i < res.length; i++){
 
@@ -65,7 +67,7 @@ export class FestivalPage implements OnInit {
 
     await loading.present();
 
-    this.firebase.getFestival(this.festivalId).subscribe(res => {
+    this.firebaseFesti.getFestival(this.festivalId).subscribe(res => {
       
       this.festival = res;
       loading.dismiss();
@@ -73,6 +75,7 @@ export class FestivalPage implements OnInit {
     });
   }
 
+  
   // Opicion de un festival en formato Action Sheet
 
   async presentActionSheet() {
